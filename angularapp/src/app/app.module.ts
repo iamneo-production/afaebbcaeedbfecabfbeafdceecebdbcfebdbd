@@ -9,6 +9,7 @@ import { ResultComponent } from './result/result.component';
 import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
 import { CurrencyFormComponent } from './currency-form/currency-form.component';
 import { CurrencyResultComponent } from './currency-result/currency-result.component';
+import { ForexConverterComponent } from './forex-converter/forex-converter.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CurrencyResultComponent } from './currency-result/currency-result.compo
     ResultComponent,
     CurrencyConverterComponent,
     CurrencyFormComponent,
-    CurrencyResultComponent
+    CurrencyResultComponent,
+    ForexConverterComponent
   ],
   imports: [
     BrowserModule,

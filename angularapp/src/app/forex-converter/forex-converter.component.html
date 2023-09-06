@@ -1,0 +1,30 @@
+<p>forex-converter works!</p>
+<form #form="ngForm" (ngSubmit)="convertCurrency(form.value)">
+    <div>
+      <label for="fromCurrency">Source CCY:</label>
+      <select id="fromCurrency" name="fromCurrency" ngModel required>
+        <option value="USD">USD</option>
+        <option value="GBP">GBP</option>
+        <option value="INR">INR</option>
+      </select>
+    </div>
+    <div>
+      <label for="toCurrency">Target CCY:</label>
+      <select id="toCurrency" name="toCurrency" ngModel required>
+        <option value="USD">USD</option>
+        <option value="GBP">GBP</option>
+        <option value="INR">INR</option>
+      </select>
+    </div>
+    <div>
+      <label for="amount">Amount (Rs):</label>
+      <input type="number" id="amount" name="amount" ngModel required>
+    </div>
+    <div>
+      <button type="submit" id="submitButton">Convert</button>
+    </div>
+  </form>
+  <div id="result">
+    <p *ngIf="convertedAmount !== null">Converted Amount: {{ convertedAmount }}</p>
+  </div>
+  
