@@ -6,13 +6,19 @@ import { AppComponent } from './app.component';
 import { CurrencyconverterComponent } from './currencyconverter/currencyconverter.component';
 import { CurrencyformComponent } from './currencyform/currencyform.component';
 import { ResultComponent } from './result/result.component';
+import { CurrencyConverterComponent } from './currency-converter/currency-converter.component';
+import { CurrencyFormComponent } from './currency-form/currency-form.component';
+import { CurrencyResultComponent } from './currency-result/currency-result.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CurrencyconverterComponent,
     CurrencyformComponent,
-    ResultComponent
+    ResultComponent,
+    CurrencyConverterComponent,
+    CurrencyFormComponent,
+    CurrencyResultComponent
   ],
   imports: [
     BrowserModule,
