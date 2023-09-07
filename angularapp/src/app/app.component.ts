@@ -1,29 +1,21 @@
 import { Component } from '@angular/core';
-import { ForexService } from '../forex.service';
 
 @Component({
-  selector: 'app-forex-converter',
-  templateUrl: './forex-converter.component.html',
-  styleUrls: ['./forex-converter.component.css']
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
-export class ForexConverterComponent {
-  convertedAmount: number | undefined;
-  resultMessage: string | undefined;
-
-  constructor(private forexService: ForexService) { }
-
-  convertCurrency(form: any) {
-    const fromCurrency = form.value.fromCurrency;
-    const toCurrency = form.value.toCurrency;
-    const amount = form.value.amount;
-
-    const exchangeRate = this.forexService.getExchangeRate(fromCurrency, toCurrency);
-
-    if (!isNaN(amount)) {
-      this.convertedAmount = amount * exchangeRate;
-      this.resultMessage = `${amount} ${fromCurrency} = ${this.convertedAmount.toFixed(2)} ${toCurrency}`;
-    } else {
-      this.resultMessage = "Please enter a valid amount.";
+export class AppComponent {
+  title = 'angularapp';
+  opt1:number;
+  opt2:number;
+  amt:number;
+  res:number;
+  result:string;
+  exchange (a:number,b:number,amt:number){
+    if(a!=null && b!=null){
+      this.result=Math.round(b/a*amt).toFixed(2);
+      return this.result;
     }
   }
 }
