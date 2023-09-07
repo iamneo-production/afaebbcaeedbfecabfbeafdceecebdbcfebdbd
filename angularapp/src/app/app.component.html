@@ -1,29 +1,61 @@
-<h2>Forex Converter</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Forex Conversion</title>
+</head>
+<body>
+    <h1>Live Forex Conversion</h1>
+    <form id="conversionForm">
+        <label for="fromCurrency">Source CCY:</label>
+        <select id="fromCurrency">
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+            <option value="INR">INR</option>
+        </select><br>
 
-<form #app="ngForm" (ngSubmit)="convertCurrency(app)">
-  <label for="fromCurrency">Source CCY:</label>
-  <select name="fromCurrency" ngModel>
-    <option value="USD">USD</option>
-    <option value="GBP">GBP</option>
-    <option value="INR">INR</option>
-  </select>
-  <br>
+        <label for="toCurrency">Target CCY:</label>
+        <select id="toCurrency">
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+            <option value="INR">INR</option>
+        </select><br>
 
-  <label for="toCurrency">Target CCY:</label>
-  <select name="toCurrency" ngModel>
-    <option value="USD">USD</option>
-    <option value="GBP">GBP</option>
-    <option value="INR">INR</option>
-  </select>
-  <br>
+        <label for="Amount">Amount (Rs):</label>
+        <input type="number" id="Amount" step="0.01" required><br>
 
-  <label for="amount">Amount (Rs):</label>
-  <input type="number" name="amount" ngModel required>
-  <br>
+        <input type="submit" id="submitButton" value="Convert">
+    </form>
 
-  <button type="submit" [disabled]="!app.form.valid">Convert</button>
-</form>
+    <div id="result"></div>
 
-<div *ngIf="convertedAmount !== undefined" id="result">
-  {{ resultMessage }}
-</div>
+    <script>
+        // Define the exchange rates
+        const exchangeRates = {
+            "USD": 1.126735,
+            "GBP": 0.876893,
+            "INR": 79.677056
+        };
+
+        // Function to perform currency conversion
+        function convertCurrency(event) {
+            event.preventDefault();
+
+            // Get user input
+            const fromCurrency = document.getElementById("fromCurrency").value;
+            const toCurrency = document.getElementById("toCurrency").value;
+            const amount = parseFloat(document.getElementById("Amount").value);
+
+            // Perform the conversion
+            const convertedAmount = (amount / exchangeRates[fromCurrency]) * exchangeRates[toCurrency];
+
+            // Display the result
+            document.getElementById("result").innerHTML = `${amount} ${fromCurrency} is approximately ${convertedAmount.toFixed(2)} ${toCurrency}`;
+        }
+
+        // Attach the conversion function to the form submit event
+        document.getElementById("conversionForm").addEventListener("submit", convertCurrency);
+    </script>
+</body>
+</html>
