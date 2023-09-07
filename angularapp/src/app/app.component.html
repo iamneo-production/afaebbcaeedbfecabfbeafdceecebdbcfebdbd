@@ -1,61 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Forex Conversion</title>
-</head>
-<body>
-    <form id="forexConverter">
-        <label for="fromCurrency">Source CCY:</label>
-        <select id="fromCurrency" name="fromCurrency">
-            <option value="USD">USD</option>
-            <option value="GBP">GBP</option>
-            <option value="INR">INR</option>
-        </select>
-
-        <label for="toCurrency">Target CCY:</label>
-        <select id="toCurrency" name="toCurrency">
-            <option value="USD">USD</option>
-            <option value="GBP">GBP</option>
-            <option value="INR">INR</option>
-        </select>
-
-        <label for="amount">Amount (Rs):</label>
-        <input type="number" id="amount" name="amount" min="0" step="0.01" required>
-
-        <button type="submit" id="submitButton">Convert</button>
-    </form>
-
-    <div id="result"></div>
-
+    <title>Forex Converter</title>
     <script>
-        // Exchange rates
+        // Define exchange rates
         const exchangeRates = {
             "USD": 1.126735,
             "GBP": 0.876893,
             "INR": 79.677056
         };
 
-        const form = document.getElementById("forexConverter");
-        const resultContainer = document.getElementById("result");
-
-        form.addEventListener("submit", function (e) {
-            e.preventDefault();
-
+        function convertCurrency() {
+            // Get user input
             const fromCurrency = document.getElementById("fromCurrency").value;
             const toCurrency = document.getElementById("toCurrency").value;
             const amount = parseFloat(document.getElementById("amount").value);
 
+            // Check if the input is valid
             if (isNaN(amount)) {
-                resultContainer.textContent = "Please enter a valid amount.";
-            } else {
-                const conversionRate = exchangeRates[toCurrency] / exchangeRates[fromCurrency];
-                const convertedAmount = (amount * conversionRate).toFixed(2);
-
-                resultContainer.textContent = `${amount} ${fromCurrency} is equal to ${convertedAmount} ${toCurrency}`;
+                document.getElementById("result").innerHTML = "Please enter a valid amount.";
+                return;
             }
-        });
+
+            // Perform conversion
+            const convertedAmount = (amount / exchangeRates[fromCurrency]) * exchangeRates[toCurrency];
+
+            // Display the result
+            document.getElementById("result").innerHTML = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
+        }
     </script>
+</head>
+<body>
+    <h1>Live Forex Conversion</h1>
+    <form>
+        <label for="fromCurrency">Source CCY:</label>
+        <select id="fromCurrency">
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+            <option value="INR">INR</option>
+        </select>
+        <br>
+
+        <label for="toCurrency">Target CCY:</label>
+        <select id="toCurrency">
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+            <option value="INR">INR</option>
+        </select>
+        <br>
+
+        <label for="amount">Amount (Rs):</label>
+        <input type="text" id="amount">
+        <br>
+
+        <button type="button" id="submitButton" onclick="convertCurrency()">Convert</button>
+    </form>
+
+    <div id="result"></div>
 </body>
 </html>
+
