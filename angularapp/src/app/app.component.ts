@@ -8,4 +8,3 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'angularapp';
 }
-convertedAmount = this.amount;
